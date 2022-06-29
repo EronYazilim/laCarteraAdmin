@@ -1,0 +1,199 @@
+<ng-template #modalStokKart let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">{{modalHeader.title}}</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('');">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form validControl [formGroup]="stokKartFormu" (submit)="islemiKaydet()">
+        <div class="row m-0">
+            <div class="col-md-3 form-group">
+                <label>Cinsiyet: *</label>
+                <select class="form-control" formControlName="e_cinsiyet" title="Cinsiyet" required>
+                  <option value="Erkek">Erkek</option>
+                  <option value="Kadın">Kadın</option>
+                  <option value="Unisex">Unisex</option>
+                </select>
+            </div>
+            <div class="col-md-3 form-group">
+                <label>Stok Kodu: *</label>
+                <input type="text" class="form-control" formControlName="e_stok_kart_kodu" title="Stok Kodu" required>
+            </div>
+            <div class="col-md-3 form-group">
+                <label>Stok Kart Adı:</label>
+                <input type="text" class="form-control" formControlName="e_stok_kart_adi" title="Stok Kart Adı" required>
+            </div>
+            <div class="col-md-3 form-group">
+                <label>Abonelik Durumu: *</label>
+                <select class="form-control" formControlName="e_durum" title="Durum" required>
+                    <option value="">-- Seçiniz --</option>
+                    <option value="Aktif">Aktif</option>
+                    <option value="Pasif">Pasif</option>
+                </select>
+            </div>
+            <div class="col-md-3 form-group">
+                <label>Fiyat(1): *</label>
+                <input type="text" class="form-control" formControlName="e_fiyat_1" title="Fiyat(1)" mask="separator.2" prefix="₺ " required>
+            </div>
+            <div class="col-md-3 form-group">
+                <label>Fiyat(2): *</label>
+                <input type="text" class="form-control" formControlName="e_fiyat_2" title="Fiyat(2)" mask="separator.2" prefix="₺ " required>
+            </div>
+            <div class="col-md-3 form-group">
+                <label>Fiyat(3): *</label>
+                <input type="text" class="form-control" formControlName="e_fiyat_3" title="Fiyat(3)" mask="separator.2" prefix="₺ " required>
+            </div>
+            <div class="col-md-3 form-group">
+                <label>Resim Uzantısı: *</label>
+                <input type="text" class="form-control" formControlName="e_resim_dosya_uzantisi" title="Resim Uzantısı" required>
+            </div>
+            <div class="col-md-12 form-group">
+                <label>Açıklama: *</label>
+                <ckeditor [editor]="Editor" [config]="editor_config" formControlName="e_stok_kart_aciklamasi" (ready)="editorReady($event)" ></ckeditor>
+            </div>
+            <div class="col-md-12 form-group">
+                <label>Resim</label>
+                <div class="custom-file mb-2">
+                  <input id="eklenecekResim" class="custom-file-input" type="file" (change)="fileChangeEvent($event)" title="Kullanıcı Resmi">
+                  <label for="eklenecekResim" class="custom-file-label">Resim Seçin</label>
+                </div>
+                <div class="row m-0">
+                  <div class="col-md-6">
+                    <image-cropper style="width: 100%; --cropper-outline-color: rgba(0,0,0,0.7);"
+                      [imageChangedEvent]="secilenResim"
+                      [maintainAspectRatio]="true"
+                      [aspectRatio]="1
+                      /1"
+                      format="png"
+                      (imageCropped)="imageCropped($event)"
+                      (loadImageFailed)="loadImageFailed()"
+                      [resizeToWidth]="500"
+                      [resizeToHeight]="500"
+                      [containWithinAspectRatio]="true"
+                    ></image-cropper>
+                  </div>
+                  <div class="col-md-6">
+                    <div class="card">
+                      <img class="card-img" [src]="duzenlenenResim">
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+        <button id="submitButton" class="hidden">Kaydet</button>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-primary mr-1 w-lg" *ngIf="!islemiKaydetBtn" onclick="document.getElementById('submitButton').click()">
+        <i class="fas fa-check mr-2"></i> Kaydet
+      </button>
+      <button class="btn btn-primary mr-1 w-lg" *ngIf="islemiKaydetBtn">
+        <div class="spinner-glow spinner-glow-light mt-0 mr-2"></div>Kaydeliyor
+      </button>
+      <button class="btn btn-outline-dark w-lg" (click)="modal.dismiss('')"><span class="fas fa-times mr-2"></span> İptal</button>
+    </div>
+</ng-template>
+
+<div class="separator-breadcrumb border-top mb-3"></div>
+
+<div class="card shadow-primary mb-2">
+<div class="card-body">
+    <form class="row m-0" (submit)="stokKartKayitlariListele()">
+    <div class="form-group col-md-8">
+        <label>Arama:</label>
+        <input type="text" class="form-control" [(ngModel)]="filterData.ARAMA" [ngModelOptions]="{standalone: true}">
+        </div>
+        <div class="form-group col-md-2">
+        <label>Durum:</label>
+        <select class="form-control" [(ngModel)]="filterData.e_durum" [ngModelOptions]="{standalone: true}" (change)="stokKartKayitlariListele()">
+            <option value="">-- Tümü --</option>
+            <option value="Aktif">Aktif</option>
+            <option value="Pasif">Pasif</option>
+        </select>
+        </div>
+        <div class="form-group col-md-2">
+        <label>&nbsp;</label>
+        <button class="btn btn-dark btn-block"><i class="fas fa-sync mr-2"></i> Filtrele</button>
+        </div>
+    </form>
+</div>
+</div>
+
+<div class="alert alert-primary p-4" *ngIf="!stokKartTanimlari && !mainLoader">
+<i class="ri-forbid-line fs-22 mr-3 valign-middle"></i>
+<span class=" valign-middle">Listelemek istediğiniz kayıt bulunamadı.</span>
+<button class="btn btn-primary fa-pull-right w-25" (click)="ekleButton()"><span class="fas fa-plus mr-2"></span> Yeni Stok Kart Ekle</button>
+</div>
+
+<div class="alert alert-primary p-4" *ngIf="mainLoader">
+<div class="spinner-glow spinner-glow-primary m-0 mr-4 valign-middle"></div>
+<span class=" valign-middle">Stok Kart kayıtları listeleniyor, lütfen bekleyiniz.</span>
+</div>
+
+<div class="card full-list-1" [hidden]="!stokKartTanimlari || mainLoader">
+<div class="card-body" *ngIf="stokKartTanimlari && !mainLoader">
+    <div class="table-responsive">
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr class="alert-primary">
+            <th class="text-center w-10">Cinsiyet</th>
+            <th class="text-center w-10">Stok Kodu</th>
+            <th class="text-center w-20">Ürün Adı</th>
+            <th class="text-center w-10">Fiyat(1)</th>
+            <th class="text-center w-10">Fiyat(2)</th>
+            <th class="text-center w-10">Fiyat(3)</th>
+            <th class="text-center w-10">Durum</th>
+            <th class="text-center w-15">
+                <button class="btn btn-primary btn-sm btn-block " (click)="ekleButton()"  ><i class="fas fa-plus mr-1"></i> Yeni Stok Kartı Ekle</button>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let stok of stokKartTanimlari">
+            <td class="text-center">
+                <span class="badge badge-success p-1 w-100 " style="background-color: blue;" *ngIf="stok.e_cinsiyet == 'Erkek'">Erkek</span>
+                <span class="badge badge-secondary p-1 w-100 " style="background-color: pink;" *ngIf="stok.e_cinsiyet == 'Kadın'">Kadın</span>
+                <span class="badge badge-secondary p-1 w-100 " style="background-color: rgb(72, 72, 72);" *ngIf="stok.e_cinsiyet == 'Unisex'">Unisex</span>
+            </td>
+            <td class="text-center">{{stok.e_stok_kart_kodu}}</td>
+            <td class="text-left">{{stok.e_stok_kart_adi}}</td>
+            <td class="text-right">{{stok.e_fiyat_1 | currency: ' '}} ₺</td>
+            <td class="text-right">{{stok.e_fiyat_2 | currency: ' '}} ₺</td>
+            <td class="text-right">{{stok.e_fiyat_3 | currency: ' '}} ₺</td>
+            <td class="text-center">
+                <span class="badge badge-success p-1 w-100 " *ngIf="stok.e_durum == 'Aktif'">Aktif</span>
+                <span class="badge badge-secondary p-1 w-100 " *ngIf="stok.e_durum != 'Aktif'">Pasif</span>
+            </td>
+            <td class="text-left">
+                <button class="btn btn-sm btn-outline-primary w-48" style="margin-right: 3%;" (click)="duzenleButton(stok)" ><i class="fas fa-edit"></i></button>
+                <button class="btn btn-sm btn-dark w-48" (click)="silButton(stok, 'stokKartIslemleri/stokKartSil');"><i class="fas fa-times"></i></button>
+                <button class="btn btn-sm btn-dark w-48" *ngIf="silinenKayitBtn[stok.e_id]"><div class="spinner-glow spinner-glow-light mt-0"></div></button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+<div class="card-footer">
+    <div class="card-footer-pagination">
+    <pagination
+        [boundaryLinks]="true"
+        [totalItems]="stokKartTanimlari ? stokKartTanimlari[0].TKS : 0"
+        [itemsPerPage]="filterData.KS"
+        [(ngModel)]="filterData.SS"
+        previousText="&lsaquo;"
+        nextText="&rsaquo;"
+        firstText="İlk Sayfa"
+        lastText="Son Sayfa"
+        [maxSize]="5"
+        [rotate]="false"
+        (pageChanged)="filterData.SS = $event.page; stokKartKayitlariListele()"
+    ></pagination>
+    <div class="text-center" *ngIf="stokKartTanimlari && !mainLoader">
+        <small>Toplam <strong>{{stokKartTanimlari[0].TKS}}</strong> kayıt içinden <strong>{{stokKartTanimlari.length}}</strong> tanesi listelendi.</small>
+    </div>
+    </div>
+</div>
+</div>
+
