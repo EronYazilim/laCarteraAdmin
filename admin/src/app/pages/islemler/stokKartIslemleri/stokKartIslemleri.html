@@ -137,8 +137,9 @@
     <table class="table table-bordered table-hover">
         <thead>
         <tr class="alert-primary">
+            <th class="text-center w-5">Ürün ID</th>
             <th class="text-center w-10">Cinsiyet</th>
-            <th class="text-center w-10">Stok Kodu</th>
+            <th class="text-center w-5">Stok Kodu</th>
             <th class="text-center w-20">Ürün Adı</th>
             <th class="text-center w-10">Fiyat(1)</th>
             <th class="text-center w-10">Fiyat(2)</th>
@@ -151,6 +152,7 @@
         </thead>
         <tbody>
         <tr *ngFor="let stok of stokKartTanimlari">
+            <td class="text-center">{{stok.e_id}}</td>
             <td class="text-center">
                 <span class="badge badge-success p-1 w-100 " style="background-color: blue;" *ngIf="stok.e_cinsiyet == 'Erkek'">Erkek</span>
                 <span class="badge badge-secondary p-1 w-100 " style="background-color: pink;" *ngIf="stok.e_cinsiyet == 'Kadın'">Kadın</span>

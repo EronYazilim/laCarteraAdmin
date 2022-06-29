@@ -15,75 +15,72 @@ import Swal from 'sweetalert2/dist/sweetalert2'
 })
 
 export class kullaniciKayitlariComponent implements OnInit {
-    constructor(
-        public islem : webServisIslemCalistir,
-        private toastr: ToastrService,
-        private modalService: NgbModal,
-        private bs: BreadcrumpService,
-        private titleService: Title,
-        private modalConfig: NgbModalConfig
-      ) { 
-        modalConfig.backdrop = 'static'
-        modalConfig.keyboard = false
-        modalConfig.size = 'sm'
-    }
+  constructor(
+    public islem : webServisIslemCalistir,
+    private toastr: ToastrService,
+    private modalService: NgbModal,
+    private bs: BreadcrumpService,
+    private titleService: Title,
+    private modalConfig: NgbModalConfig
+  ) { 
+    modalConfig.backdrop = 'static'
+    modalConfig.keyboard = false
+    modalConfig.size = 'sm'
+  }
       
-    @ViewChild('modalkullaniciTanimlari') modalkullaniciTanimlari: ElementRef
-    
-    modalHeader = { title: '' }
+  @ViewChild('modalkullaniciTanimlari') modalkullaniciTanimlari: ElementRef
+  
+  modalHeader = { title: '' }
 
-    kullaniciTanimlariFormu = new FormGroup({
-        islem           : new FormControl(''),
-        method          : new FormControl(''),
-        e_kull_adi      : new FormControl(''),
-        e_sifre         : new FormControl(''),
-        e_durum         : new FormControl(''),
-        ESKI_ID         : new FormControl(''),
-    })
-    
-    filterData = {
-    ARAMA   : '',
-    SS      : 1,
-    KS      : 15,
-    e_durum : ''
-    }
-    
-    requestData
-    responseData
-    mainLoader = false
+  kullaniciTanimlariFormu = new FormGroup({
+      islem           : new FormControl(''),
+      method          : new FormControl(''),
+      e_kull_adi      : new FormControl(''),
+      e_sifre         : new FormControl(''),
+      e_durum         : new FormControl(''),
+      ESKI_ID         : new FormControl(''),
+  })
+  
+  filterData = {
+  ARAMA   : '',
+  SS      : 1,
+  KS      : 15,
+  e_durum : ''
+  }
+  
+  requestData
+  responseData
+  mainLoader = false
 
-    kullaniciTanimlari
-    
-    islemiKaydetBtn = false
-    silinenKayitBtn = [false]
+  kullaniciTanimlari
+  
+  islemiKaydetBtn = false
+  silinenKayitBtn = [false]
 
 
-    ngOnInit() {
-    this.titleService.setTitle("laCartera | Kullanıcılar")
-    this.bs.change(["Kayıtlar", "Kullanıcı Kayıtları"])
+  ngOnInit() {
+  this.titleService.setTitle("laCartera | Kullanıcılar")
+  this.bs.change(["Kayıtlar", "Kullanıcı Kayıtları"])
 
-    this.kullaniciTanimlariListele()
-    }
+  this.kullaniciTanimlariListele()
+  }
 
-    modalAc(content, size) {
-        this.modalConfig.size = size
-        this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true })
-    }
+  modalAc(content, size) {
+      this.modalConfig.size = size
+      this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true })
+  }
 
-    async kullaniciTanimlariListele(): Promise<void> {
-        this.mainLoader = true
-        this.kullaniciTanimlari = await this.islem.WebServisSorguSonucu("GET", "kullaniciIslemleri/kullaniciListesi", this.filterData)
-        if (Object.keys(this.kullaniciTanimlari).length == 0) { this.kullaniciTanimlari = null }
-        this.mainLoader = false
-    }
-    
+  async kullaniciTanimlariListele(): Promise<void> {
+      this.mainLoader = true
+      this.kullaniciTanimlari = await this.islem.WebServisSorguSonucu("GET", "kullaniciIslemleri/kullaniciListesi", this.filterData)
+      if (Object.keys(this.kullaniciTanimlari).length == 0) { this.kullaniciTanimlari = null }
+      this.mainLoader = false
+  }
     
   ekleButton() {
     this.kullaniciTanimlariFormu.patchValue({
       islem           :'kullaniciIslemleri/kullaniciEkle',
       method          :'POST',
-      e_mail_adresi   : '',
-      e_personel_adi  : '',
       e_kull_adi      : '',
       e_sifre         : '',
       e_durum         : ''
@@ -96,8 +93,7 @@ export class kullaniciKayitlariComponent implements OnInit {
     this.kullaniciTanimlariFormu.patchValue({
       islem             : 'kullaniciIslemleri/kullaniciDuzenle',
       method            : 'PUT',
-      e_mail_adresi     : secilenKayit.e_mail_adresi,
-      e_personel_adi    : secilenKayit.e_personel_adi,
+      e_kull_adi        : secilenKayit.e_kullanici_adi,
       e_sifre           : secilenKayit.e_sifre,
       e_durum           : secilenKayit.e_durum,
       ESKI_ID           : secilenKayit.e_id

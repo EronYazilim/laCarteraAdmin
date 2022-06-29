@@ -94,7 +94,7 @@
                 <span class="badge badge-secondary p-1 w-100 " *ngIf="kullanici.e_durum != 'Aktif'">Pasif</span></td>
               <td class="text-center">
                 <button class="btn btn-sm btn-outline-primary w-48" style="margin-right: 3%;" (click)="duzenleButton(kullanici)" ><i class="fas fa-edit"></i></button>
-                <button class="btn btn-sm btn-dark w-48" (click)="silButton(kullanici, 'kullaniciIslemleri/kullaniciSil');"><i class="fas fa-times"></i></button>
+                <button class="btn btn-sm btn-dark w-48" *ngIf="!silinenKayitBtn[kullanici.e_id]" (click)="silButton(kullanici, 'kullaniciIslemleri/kullaniciSil');"><i class="fas fa-times"></i></button>
                 <button class="btn btn-sm btn-dark w-48" *ngIf="silinenKayitBtn[kullanici.e_id]"><div class="spinner-glow spinner-glow-light mt-0"></div></button>
               </td>
             </tr>
