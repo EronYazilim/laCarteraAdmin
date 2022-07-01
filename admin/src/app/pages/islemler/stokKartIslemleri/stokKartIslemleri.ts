@@ -110,7 +110,7 @@ export class stokKartIslemleriComponent implements OnInit {
       e_fiyat_2                 : '',
       e_fiyat_3                 : '',
       e_resim_dosya_uzantisi    : '',
-      e_durum                   : ''
+      e_durum                   : 'Aktif'
     })
     this.secilenResim = ''
     this.duzenlenenResim = ''
