@@ -11,6 +11,12 @@ export const MENU: MenuItem[] = [
 		subItems: [{
 			label: 'Kullanıcı Kayıtları',
 			link: './kayitlar/kullaniciKayitlari'
+		}, {
+			label: 'Sipariş Kayıtları',
+			link: './kayitlar/siparisKayitlari'
+		}, {
+			label: 'Satış Kayıtları',
+			link: './kayitlar/satisKayitlari'
 		}]
 	}, {
 		label: 'İşlemler',

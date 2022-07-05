@@ -8,6 +8,8 @@ import { NgxEchartsModule } from "ngx-echarts";
 import { NgxMaskModule } from "ngx-mask";
 import { kayitlarRoutingModule } from "./kayitlar-routing";
 import { kullaniciKayitlariComponent } from "./kullaniciKayitlari/kullaniciKayitlari";
+import { siparisKayitlariComponent } from "./siparisKayitlari/siparisKayitlari";
+import { satisKayitlariComponent } from "./satisKayitlari/satisKayitlari";
 
 @NgModule({
     imports: [
@@ -22,7 +24,9 @@ import { kullaniciKayitlariComponent } from "./kullaniciKayitlari/kullaniciKayit
       AccordionModule.forRoot()
     ],
     declarations: [
-      kullaniciKayitlariComponent
+      kullaniciKayitlariComponent,
+      siparisKayitlariComponent,
+      satisKayitlariComponent
     ]
   })
   
