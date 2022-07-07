@@ -1,3 +1,43 @@
+<ng-template #modalSiparisDetaylari let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">{{modalHeader.title}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('');">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="table-responsive">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th class="text-center">Stok Kodu</th>
+            <th class="text-center">Ürün Adı</th>
+            <th class="text-center">Adet</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let detay of secilenKayit.KALEMLER">
+            <td class="text-left">{{detay.e_stok_kart_kodu}}</td>
+            <td class="text-left">{{detay.e_stok_kart_adi}}</td>
+            <td class="text-left">{{detay.e_miktar}}</td>
+            <td class="text-center">X</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <!-- <button class="btn btn-primary mr-1 w-lg" *ngIf="!islemiKaydetBtn" onclick="document.getElementById('submitButton').click()">
+      <i class="fas fa-check mr-2"></i> Kaydet
+    </button>
+    <button class="btn btn-primary mr-1 w-lg" *ngIf="islemiKaydetBtn">
+      <div class="spinner-glow spinner-glow-light mt-0 mr-2"></div> Kaydeliyor
+    </button> -->
+    <button class="btn btn-outline-dark w-lg" (click)="modal.dismiss('')"><span class="fas fa-times mr-2"></span> İptal</button>
+  </div>
+</ng-template>
+
 <div class="separator-breadcrumb border-top mb-3"></div>
   
 <div class="card shadow-dark mb-3">
@@ -47,7 +87,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let siparis of siparisListesi">
+            <tr *ngFor="let siparis of siparisListesi" (click)="siparisDetayAc(siparis)">
                 <td class="text-left">{{siparis.e_tarih | date: 'dd.MM.yyyy - HH:mm'}}</td>
                 <td class="text-left">{{siparis.e_siparisi_acan_kullanici_adi}}</td>
                 <td class="text-left">{{siparis.e_farkli_kalem_sayisi}} adet</td>

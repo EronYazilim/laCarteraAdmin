@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { Title } from "@angular/platform-browser";
 import { NgbModal, NgbModalConfig } from "@ng-bootstrap/ng-bootstrap";
 import { ToastrService } from "ngx-toastr";
@@ -26,6 +26,10 @@ export class siparisKayitlariComponent implements OnInit {
         modalConfig.size = 'sm'
     }
 
+    @ViewChild('modalSiparisDetaylari') modalSiparisDetaylari: ElementRef
+
+    modalHeader = { title: '' }
+
     filterData = {
         ARAMA   : '',
         SS      : 1,
@@ -37,12 +41,18 @@ export class siparisKayitlariComponent implements OnInit {
     mainLoader = false
 
     siparisListesi
+    secilenKayit
 
     ngOnInit() {
         this.titleService.setTitle("laCartera | Sipariş Kayıtları")
         this.bs.change(["Kayıtlar", "Sipariş Kayıtları"])
 
         this.siparisListele()
+    }
+
+    modalAc(content, size) {
+        this.modalConfig.size = size
+        this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true })
     }
     
     async siparisListele() {
@@ -51,5 +61,11 @@ export class siparisKayitlariComponent implements OnInit {
         if (Object.keys(this.siparisListesi).length == 0) { this.siparisListesi = null}
         this.mainLoader = false
 
+    }
+
+    siparisDetayAc(secilenKayit) {
+        this.secilenKayit = secilenKayit
+        this.modalHeader.title = 'Sipariş Detayları'
+        this.modalAc(this.modalSiparisDetaylari, 'lg')
     }
 }
