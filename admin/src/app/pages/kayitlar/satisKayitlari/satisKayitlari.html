@@ -1,0 +1,79 @@
+<div class="separator-breadcrumb border-top mb-3"></div>
+  
+<div class="card shadow-dark mb-3">
+  <div class="card-body">
+    <form class="row m-0" (submit)="satisListele()">
+      <div class="form-group col-md-8">
+        <label>Arama:</label>
+        <input type="text" class="form-control" [(ngModel)]="filterData.ARAMA" [ngModelOptions]="{standalone: true}">
+      </div>
+      <div class="form-group col-md-2">
+        <label>Durum:</label>
+        <select class="form-control" [(ngModel)]="filterData.e_durum" [ngModelOptions]="{standalone: true}" (change)="satisListele()">
+          <option value="">-- Tümü --</option>
+          <option value="Aktif">Aktif</option>
+          <option value="Pasif">Pasif</option>
+        </select>
+      </div>
+      <div class="form-group col-md-2">
+        <label>&nbsp;</label>
+        <button class="btn btn-dark btn-block" (click)="satisListele()"><i class="fas fa-sync mr-2"></i> Filtrele</button>
+      </div>
+    </form>
+  </div>
+</div>
+  
+<div class="alert alert-primary p-4" *ngIf="!satisListesi && !mainLoader">
+  <i class="ri-forbid-line fs-22 mr-3 valign-middle"></i>
+  <span class=" valign-middle">Listelemek istediğiniz kayıt bulunamadı.</span>
+</div> 
+  
+<div class="alert alert-primary p-4" *ngIf="mainLoader">
+    <div class="spinner-glow spinner-glow-primary m-0 mr-4 valign-middle"></div>
+    <span class="valign-middle">Sipariş kayıtları listeleniyor, lütfen bekleyiniz.</span>
+</div>
+  
+<div class="card full-list-1" [hidden]="!satisListesi || mainLoader">
+    <div class="card-body" *ngIf="satisListesi && !mainLoader">
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr class="alert-primary">
+              <th class="text-center w-25">Tarih</th>
+              <th class="text-center w-25">Siparişi Açan</th>
+              <th class="text-center w-25">Ödeme Şekli</th>
+              <th class="text-center w-25">Tutar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let satis of satisListesi">
+                <td class="text-center">{{satis.e_tarih | date: 'dd.MM.yyyy - HH:mm'}}</td>
+                <td class="text-left">{{satis.e_satisi_acan_kullanici_adi}}</td>
+                <td class="text-left">{{satis.e_odeme_tipi}} adet</td>
+                <td class="text-right">{{satis.e_sepet_toplami | currency : ' '}} ₺</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="card-footer-pagination">
+        <pagination
+          [boundaryLinks]="true"
+          [totalItems]="satisListesi ? satisListesi[0].TKS : 0"
+          [itemsPerPage]="filterData.KS"
+          [(ngModel)]="filterData.SS"
+          previousText="&lsaquo;"
+          nextText="&rsaquo;"
+          firstText="İlk Sayfa"
+          lastText="Son Sayfa"
+          [maxSize]="5"
+          [rotate]="false"
+          (pageChanged)="filterData.SS = $event.page; satisListele()"
+        ></pagination>
+        <div class="text-center" *ngIf="satisListesi && !mainLoader">
+          <small>Toplam <strong>{{satisListesi[0].TKS}}</strong> kayıt içinden <strong>{{satisListesi.length}}</strong> tanesi listelendi.</small>
+        </div>
+      </div>
+    </div>
+</div>

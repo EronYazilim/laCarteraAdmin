@@ -1,0 +1,84 @@
+<div class="separator-breadcrumb border-top mb-3"></div>
+  
+<div class="card shadow-dark mb-3">
+  <div class="card-body">
+    <form class="row m-0" (submit)="siparisListele()">
+      <div class="form-group col-md-8">
+        <label>Arama:</label>
+        <input type="text" class="form-control" [(ngModel)]="filterData.ARAMA" [ngModelOptions]="{standalone: true}">
+      </div>
+      <div class="form-group col-md-2">
+        <label>Durum:</label>
+        <select class="form-control" [(ngModel)]="filterData.e_durum" [ngModelOptions]="{standalone: true}" (change)="siparisListele()">
+          <option value="">-- Tümü --</option>
+          <option value="Aktif">Aktif</option>
+          <option value="Pasif">Pasif</option>
+        </select>
+      </div>
+      <div class="form-group col-md-2">
+        <label>&nbsp;</label>
+        <button class="btn btn-dark btn-block" (click)="siparisListele()"><i class="fas fa-sync mr-2"></i> Filtrele</button>
+      </div>
+    </form>
+  </div>
+</div>
+  
+<div class="alert alert-primary p-4" *ngIf="!siparisListesi && !mainLoader">
+  <i class="ri-forbid-line fs-22 mr-3 valign-middle"></i>
+  <span class=" valign-middle">Listelemek istediğiniz kayıt bulunamadı.</span>
+</div> 
+  
+<div class="alert alert-primary p-4" *ngIf="mainLoader">
+    <div class="spinner-glow spinner-glow-primary m-0 mr-4 valign-middle"></div>
+    <span class="valign-middle">Sipariş kayıtları listeleniyor, lütfen bekleyiniz.</span>
+</div>
+  
+<div class="card full-list-1" [hidden]="!siparisListesi || mainLoader">
+    <div class="card-body" *ngIf="siparisListesi && !mainLoader">
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr class="alert-primary">
+              <th class="text-center w-20">Tarih</th>
+              <th class="text-center w-20">Siparişi Açan</th>
+              <th class="text-center w-20">Ürün Kalem Adedi</th>
+              <th class="text-center w-20">Miktar</th>
+              <th class="text-center w-20">Durum</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let siparis of siparisListesi">
+                <td class="text-left">{{siparis.e_tarih | date: 'dd.MM.yyyy - HH:mm'}}</td>
+                <td class="text-left">{{siparis.e_siparisi_acan_kullanici_adi}}</td>
+                <td class="text-left">{{siparis.e_farkli_kalem_sayisi}} adet</td>
+                <td class="text-left">{{siparis.e_toplam_miktar}} adet</td>
+                <td class="text-center">
+                    <span class="badge badge-success p-1 w-100 " *ngIf="siparis.e_durum == 'Aktif'">Aktif</span>
+                    <span class="badge badge-secondary p-1 w-100 " *ngIf="siparis.e_durum != 'Aktif'">Pasif</span>
+                </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="card-footer">
+      <div class="card-footer-pagination">
+        <pagination
+          [boundaryLinks]="true"
+          [totalItems]="siparisListesi ? siparisListesi[0].TKS : 0"
+          [itemsPerPage]="filterData.KS"
+          [(ngModel)]="filterData.SS"
+          previousText="&lsaquo;"
+          nextText="&rsaquo;"
+          firstText="İlk Sayfa"
+          lastText="Son Sayfa"
+          [maxSize]="5"
+          [rotate]="false"
+          (pageChanged)="filterData.SS = $event.page; siparisListele()"
+        ></pagination>
+        <div class="text-center" *ngIf="siparisListesi && !mainLoader">
+          <small>Toplam <strong>{{siparisListesi[0].TKS}}</strong> kayıt içinden <strong>{{siparisListesi.length}}</strong> tanesi listelendi.</small>
+        </div>
+      </div>
+    </div>
+</div>
