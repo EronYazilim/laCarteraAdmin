@@ -66,7 +66,7 @@ export class girisComponent implements OnInit {
           this.store.setItem("laCartera_admin_e_kull_adi", "")
         }
 
-        window.location.href = './anasayfa'
+        window.location.href = './kayitlar/siparisKayitlari'
       } else {
         this.toastr.error(this.responseData[0].HATA_ACIKLAMASI, 'Giriş Başarısız !', { timeOut: 3000, closeButton: true, progressBar: true })
         this.authenticationService.logout()

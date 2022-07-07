@@ -21,10 +21,10 @@
               <table class="table table-bordered table-hover">
                 <thead>
                   <tr>
-                    <th class="text-center">Stok Kodu</th>
-                    <th class="text-center">Ürün Adı</th>
-                    <th class="text-center">Adet</th>
-                    <th></th>
+                    <th class="text-center w-10">Stok Kodu</th>
+                    <th class="text-center w-25">Ürün Adı</th>
+                    <th class="text-center w-10">Adet</th>
+                    <th class="text-center w-55">Açıklama</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -32,7 +32,8 @@
                     <td class="text-left">{{detay.e_stok_kart_kodu}}</td>
                     <td class="text-left">{{detay.e_stok_kart_adi}}</td>
                     <td class="text-center">{{detay.e_miktar}}</td>
-                    <td class="text-center">X</td>
+                    <td class="text-left" *ngIf="secilenKayit.e_aciklama != ''">{{secilenKayit.e_aciklama}}</td>
+                    <td class="text-left" *ngIf="secilenKayit.e_aciklama == ''"><a style="color : gray">(Açıklama Yok)</a></td>
                   </tr>
                 </tbody>
               </table>
@@ -55,29 +56,6 @@
 
 <div class="separator-breadcrumb border-top mb-3"></div>
 
-<div class="card shadow-dark mb-3">
-  <div class="card-body">
-    <form class="row m-0" (submit)="siparisListele()">
-      <div class="form-group col-md-8">
-        <label>Arama:</label>
-        <input type="text" class="form-control" [(ngModel)]="filterData.ARAMA" [ngModelOptions]="{standalone: true}">
-      </div>
-      <div class="form-group col-md-2">
-        <label>Durum:</label>
-        <select class="form-control" [(ngModel)]="filterData.e_durum" [ngModelOptions]="{standalone: true}" (change)="siparisListele()">
-          <option value="">-- Tümü --</option>
-          <option value="İşlem Bekliyor">İşlem Bekliyor</option>
-          <option value="İşleme Alındı">İşleme Alındı</option>
-          <option value="Gönderildi">Gönderildi</option>
-        </select>
-      </div>
-      <div class="form-group col-md-2">
-        <label>&nbsp;</label>
-        <button class="btn btn-dark btn-block" (click)="siparisListele()"><i class="fas fa-sync mr-2"></i> Filtrele</button>
-      </div>
-    </form>
-  </div>
-</div>
 
 <div class="row m-1" *ngIf="siparisOzetSayilar">
   <div class="col-3" (click)="filtreliListele('İşlem Bekliyor')">
@@ -110,6 +88,21 @@
   </div>
 </div>
 
+<div class="card shadow-dark mt-2 mb-3">
+  <div class="card-body">
+    <form class="row m-0" (submit)="siparisListele()">
+      <div class="form-group col-md-10">
+        <label>Arama:</label>
+        <input type="text" class="form-control" [(ngModel)]="filterData.ARAMA" [ngModelOptions]="{standalone: true}">
+      </div>
+      <div class="form-group col-md-2">
+        <label>&nbsp;</label>
+        <button class="btn btn-dark btn-block" (click)="siparisListele()"><i class="fas fa-sync mr-2"></i> Filtrele</button>
+      </div>
+    </form>
+  </div>
+</div>
+
 <div class="alert alert-primary p-4" *ngIf="!siparisListesi && !mainLoader">
   <i class="ri-forbid-line fs-22 mr-3 valign-middle"></i>
   <span class=" valign-middle">Listelemek istediğiniz kayıt bulunamadı.</span>
@@ -126,23 +119,27 @@
         <table class="table table-bordered table-hover">
           <thead>
             <tr class="alert-primary">
-              <th class="text-center w-20">Tarih</th>
-              <th class="text-center w-20">Siparişi Açan</th>
+              <th class="text-center w-10">Tarih</th>
+              <th class="text-center w-5">Bayi Kodu</th>
+              <th class="text-center w-15">Bayi Adı</th>
+              <th class="text-center w-15">Siparişi Açan</th>
               <th class="text-center w-20">Ürün Kalem Adedi</th>
-              <th class="text-center w-20">Miktar</th>
+              <th class="text-center w-15">Miktar</th>
               <th class="text-center w-20">Durum</th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let siparis of siparisListesi" (click)="siparisGuncelle(siparis)">
                 <td class="text-center">{{siparis.e_tarih | date: 'dd.MM.yyyy - HH:mm'}}</td>
+                <td class="text-left">{{siparis.e_bayi_kodu}}</td>
+                <td class="text-left">{{siparis.e_bayi_adi}}</td>
                 <td class="text-left">{{siparis.e_siparisi_acan_kullanici_adi}}</td>
-                <td class="text-left">{{siparis.e_farkli_kalem_sayisi}} adet</td>
-                <td class="text-left">{{siparis.e_toplam_miktar}} adet</td>
+                <td class="text-center">{{siparis.e_farkli_kalem_sayisi}} adet</td>
+                <td class="text-center">{{siparis.e_toplam_miktar}} adet</td>
                 <td class="text-center">
                     <span class="badge badge-warning p-1 w-100 " *ngIf="siparis.e_durum == 'İşlem Bekliyor'">İşlem Bekliyor</span>
-                    <span class="badge badge-secondary p-1 w-100 " *ngIf="siparis.e_durum == 'İşleme Alındı'">İşleme Alındı</span>
-                    <span class="badge badge-secondary p-1 w-100 " *ngIf="siparis.e_durum == 'Gönderildi'">Gönderildi</span>
+                    <span class="badge badge-info p-1 w-100 " *ngIf="siparis.e_durum == 'İşleme Alındı'">İşleme Alındı</span>
+                    <span class="badge badge-success p-1 w-100 " *ngIf="siparis.e_durum == 'Gönderildi'">Gönderildi</span>
                 </td>
             </tr>
           </tbody>

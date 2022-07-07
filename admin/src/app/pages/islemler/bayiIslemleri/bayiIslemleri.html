@@ -189,14 +189,14 @@
             </select>
           </div>
         </div>
-        <button id="submitButton" class="hidden">Kaydet</button>
+        <button id="submitButton2" class="hidden">Kaydet</button>
       </form>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-primary mr-1 w-lg" *ngIf="!islemiKaydetBtn" onclick="document.getElementById('submitButton').click()">
+      <button class="btn btn-primary mr-1 w-lg" *ngIf="!islemiKaydetBtnBayi" onclick="document.getElementById('submitButton2').click()">
         <i class="fas fa-check mr-2"></i> Kaydet
       </button>
-      <button class="btn btn-primary mr-1 w-lg" *ngIf="islemiKaydetBtn">
+      <button class="btn btn-primary mr-1 w-lg" *ngIf="islemiKaydetBtnBayi">
         <div class="spinner-glow spinner-glow-light mt-0 mr-2"></div> Kaydeliyor
       </button>
       <button class="btn btn-outline-dark w-lg" (click)="modal.dismiss('')"><span class="fas fa-times mr-2"></span> İptal</button>

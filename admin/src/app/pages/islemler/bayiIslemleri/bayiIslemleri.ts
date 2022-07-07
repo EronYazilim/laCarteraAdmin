@@ -180,7 +180,7 @@ export class bayiIslemleriComponent implements OnInit {
     bayiKullanicisiDuzenleButton(secilenKullanici) {
         this.bayiKullaniciKayitlariFormu.patchValue({
             islem       : 'bayiKullaniciIslemleri/kullaniciDuzenle',
-            method      : 'POST',
+            method      : 'PUT',
             e_bayi_id   : secilenKullanici.e_bayi_id,
             e_bayi_adi  : secilenKullanici.e_bayi_adi,
             e_kull_adi  : secilenKullanici.e_kull_adi,
