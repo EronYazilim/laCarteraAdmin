@@ -94,6 +94,7 @@ export class satisKayitlariComponent implements OnInit {
     bayiSec(secilenBayi) {
         this.filterData.e_bayi_id = secilenBayi.e_id
         this.filterData.e_bayi_adi = secilenBayi.e_bayi_adi
+        this.satisListele()
         this.modalService.dismissAll()
     }
 }
