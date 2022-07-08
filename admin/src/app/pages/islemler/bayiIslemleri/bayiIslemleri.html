@@ -211,26 +211,26 @@
 <div class="separator-breadcrumb border-top mb-3"></div>
 
 <div class="card shadow-primary mb-3">
-<div class="card-body">
-    <form class="row m-0" (submit)="bayiKayitlariListele()">
-    <div class="form-group col-md-8">
-        <label>Arama:</label>
-        <input type="text" class="form-control" [(ngModel)]="filterData.ARAMA" [ngModelOptions]="{standalone: true}">
-    </div>
-    <div class="form-group col-md-2">
-        <label>Durum:</label>
-        <select class="form-control" [(ngModel)]="filterData.e_durum" [ngModelOptions]="{standalone: true}" (change)="bayiKayitlariListele()">
-        <option value="">-- Tümü --</option>
-        <option value="Aktif">Aktif</option>
-        <option value="Pasif">Pasif</option>
-        </select>
-    </div>
-    <div class="form-group col-md-2">
-        <label>&nbsp;</label>
-        <button class="btn btn-dark btn-block"><i class="fas fa-sync mr-2"></i> Filtrele</button>
-    </div>
-    </form>
-</div>
+  <div class="card-body">
+      <form class="row m-0" (submit)="bayiKayitlariListele()">
+      <div class="form-group col-md-8">
+          <label>Arama:</label>
+          <input type="text" class="form-control" [(ngModel)]="filterData.ARAMA" [ngModelOptions]="{standalone: true}">
+      </div>
+      <div class="form-group col-md-2">
+          <label>Durum:</label>
+          <select class="form-control" [(ngModel)]="filterData.e_durum" [ngModelOptions]="{standalone: true}" (change)="bayiKayitlariListele()">
+          <option value="">-- Tümü --</option>
+          <option value="Aktif">Aktif</option>
+          <option value="Pasif">Pasif</option>
+          </select>
+      </div>
+      <div class="form-group col-md-2">
+          <label>&nbsp;</label>
+          <button class="btn btn-dark btn-block" (click)="bayiKayitlariListele()"><i class="fas fa-sync mr-2"></i> Filtrele</button>
+      </div>
+      </form>
+  </div>
 </div>
 
 <div class="alert alert-primary p-4" *ngIf="!bayiKayitlari && !mainLoader">
