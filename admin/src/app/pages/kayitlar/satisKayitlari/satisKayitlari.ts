@@ -27,11 +27,14 @@ export class satisKayitlariComponent implements OnInit {
     }
 
     filterData = {
-        ARAMA   : '',
-        SS      : 1,
-        KS      : 15,
-        e_durum : '',
-        ESKI_ID : ''
+        ARAMA       : '',
+        SS          : 1,
+        KS          : 15,
+        e_durum     : '',
+        e_bayi_id   : '',
+        TARIH_BAS   : '',
+        TARIH_SON   : '',
+        ESKI_ID     : ''
     }
 
     bayiFilterData = {
