@@ -43,7 +43,7 @@ export class siparisKayitlariComponent implements OnInit {
         ARAMA   : '',
         SS      : 1,
         KS      : 15,
-        e_durum : '',
+        e_durum : 'İşlem Bekliyor',
         ESKI_ID : ''
     }
 

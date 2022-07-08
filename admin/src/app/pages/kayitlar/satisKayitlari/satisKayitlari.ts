@@ -34,14 +34,25 @@ export class satisKayitlariComponent implements OnInit {
         ESKI_ID : ''
     }
 
+    bayiFilterData = {
+        ARAMA   : '',
+        SS      : 1,
+        KS      : 15,
+        e_durum : '',
+        ESKI_ID : ''
+    }
+
     mainLoader = false
+    bayiLoader = false
 
     satisListesi
+    bayiKayitlari
 
     ngOnInit() {
         this.titleService.setTitle("laCartera | Satış Kayıtları")
         this.bs.change(["Kayıtlar", "Satış Kayıtları"])
 
+        this.bayiKayitlariListele()
         this.satisListele()
     }
     
@@ -51,5 +62,12 @@ export class satisKayitlariComponent implements OnInit {
         if (Object.keys(this.satisListesi).length == 0) { this.satisListesi = null}
         this.mainLoader = false
 
+    }
+
+    async bayiKayitlariListele(): Promise<void> {
+        this.bayiLoader = true
+        this.bayiKayitlari = await this.islem.WebServisSorguSonucu("GET", "bayiIslemleri/bayiListesi", this.bayiFilterData)
+        if (Object.keys(this.bayiKayitlari).length == 0) { this.bayiKayitlari = null }
+        this.bayiLoader = false
     }
 }
