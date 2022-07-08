@@ -12,7 +12,6 @@ import { ImageCropperModule } from "ngx-image-cropper";
 
 import { stokKartIslemleriComponent } from "./stokKartIslemleri/stokKartIslemleri";
 import { bayiIslemleriComponent } from "./bayiIslemleri/bayiIslemleri";
-import { bayiKullaniciIslemleriComponent } from "./bayiKullaniciIslemleri/bayiKullaniciIslemleri";
 
 import { FormDirective } from "./islemler-directive";
 
@@ -33,7 +32,6 @@ import { FormDirective } from "./islemler-directive";
     declarations: [
       stokKartIslemleriComponent,
       bayiIslemleriComponent,
-      bayiKullaniciIslemleriComponent,
       FormDirective
     ]
   })

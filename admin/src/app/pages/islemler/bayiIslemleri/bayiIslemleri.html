@@ -30,7 +30,12 @@
           </div>
           <div class="col-md-12 form-group">
             <label>Fiyat Politikası *</label>
-            <input type="text" class="form-control" formControlName="e_fiyat_politikasi" title="Fiyat Politikası" maxlength="1" required>
+            <!-- <input type="text" class="form-control" formControlName="e_fiyat_politikasi" title="Fiyat Politikası" maxlength="1" required> -->
+            <select class="form-control" formControlName="e_fiyat_politikasi" title="Fiyat Politikası" required>
+              <option value="1">Düşük Fiyat Politikası</option>
+              <option value="2">Standart Fiyat Politikası</option>
+              <option value="3">Yüksek Fiyat Politikası</option>
+            </select>
           </div>
           <div class="col-md-12 form-group">
             <label>İskonto Oranı</label>
@@ -38,7 +43,7 @@
           </div>
           <div class="col-md-12 form-group">
             <label>Durum *</label>
-            <select class="form-control" formControlName="e_durum" title="Durum">
+            <select class="form-control" formControlName="e_durum" title="Durum" required>
               <option value="">-- Seçiniz --</option>
               <option value="Aktif">Aktif</option>
               <option value="Pasif">Pasif</option>
@@ -265,7 +270,9 @@
             <td class="text-left">{{bayi.e_yetkilisi}}</td>
             <td class="text-left">{{bayi.e_il}}</td>
             <td class="text-left">{{bayi.e_ilce}}</td>
-            <td class="text-left">{{bayi.e_fiyat_politikasi}}</td>
+            <td class="text-left" *ngIf="bayi.e_fiyat_politikasi == '1'">Düşük</td>
+            <td class="text-left" *ngIf="bayi.e_fiyat_politikasi == '2'">Standart</td>
+            <td class="text-left" *ngIf="bayi.e_fiyat_politikasi == '3'">Yüksek</td>
             <td class="text-left">{{bayi.e_iskonto_orani}} %</td>
             <td class="text-center">
                 <span class="badge badge-success p-1 w-100 " *ngIf="bayi.e_durum == 'Aktif'">Aktif</span>

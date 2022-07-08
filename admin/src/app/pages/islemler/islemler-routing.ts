@@ -1,7 +1,6 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { bayiIslemleriComponent } from "./bayiIslemleri/bayiIslemleri";
-import { bayiKullaniciIslemleriComponent } from "./bayiKullaniciIslemleri/bayiKullaniciIslemleri";
 import { stokKartIslemleriComponent } from "./stokKartIslemleri/stokKartIslemleri";
 
 const routes: Routes = [
@@ -11,9 +10,6 @@ const routes: Routes = [
   }, {
     path: 'bayiIslemleri',
     component: bayiIslemleriComponent
-  }, {
-    path: 'bayiKullaniciIslemleri',
-    component: bayiKullaniciIslemleriComponent
   }
 ];
   
