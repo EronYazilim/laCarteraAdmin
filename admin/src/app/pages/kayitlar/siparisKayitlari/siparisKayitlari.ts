@@ -109,6 +109,7 @@ export class siparisKayitlariComponent implements OnInit {
         if (this.responseData[0].S == "T") {
             this.toastr.success(this.responseData[0].MESAJ, 'İşlem Başarılı !', { timeOut: 3000, closeButton: true, progressBar: true })
             this.siparisListele()
+            this.siparisOzetSayilarListele()
             this.modalService.dismissAll()
         } else {
             this.toastr.error(this.responseData[0].HATA_ACIKLAMASI, 'İşlem Başarısız !', { timeOut: 3000, closeButton: true, progressBar: true })
