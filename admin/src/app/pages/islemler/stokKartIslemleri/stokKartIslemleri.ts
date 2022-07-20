@@ -72,7 +72,7 @@ export class stokKartIslemleriComponent implements OnInit {
   filterData = {
   ARAMA   : '',
   SS      : 1,
-  KS      : 15,
+  KS      : 8,
   e_durum : ''
   }
   

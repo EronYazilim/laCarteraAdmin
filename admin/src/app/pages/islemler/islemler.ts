@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { NgxEchartsModule } from "ngx-echarts";
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-import { AccordionModule } from "ngx-bootstrap/accordion";
 import { PaginationModule } from "ngx-bootstrap/pagination";
 import { NgxMaskModule } from "ngx-mask";
 import { islemlerRoutingModule } from "./islemler-routing";
@@ -27,7 +26,6 @@ import { FormDirective } from "./islemler-directive";
       ImageCropperModule,
       NgxMaskModule.forRoot(),
       PaginationModule.forRoot(),
-      AccordionModule.forRoot()
     ],
     declarations: [
       stokKartIslemleriComponent,

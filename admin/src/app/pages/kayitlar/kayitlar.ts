@@ -1,7 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { AccordionModule } from "ngx-bootstrap/accordion";
 import { PaginationModule } from "ngx-bootstrap/pagination";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { NgxEchartsModule } from "ngx-echarts";
@@ -21,7 +20,6 @@ import { satisKayitlariComponent } from "./satisKayitlari/satisKayitlari";
       NgxEchartsModule,
       NgxMaskModule.forRoot(),
       PaginationModule.forRoot(),
-      AccordionModule.forRoot()
     ],
     declarations: [
       kullaniciKayitlariComponent,
