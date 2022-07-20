@@ -28,6 +28,19 @@ export class siparisKayitlariComponent implements OnInit {
         modalConfig.size = 'sm'
     }
 
+    ngOnInit() {
+        this.titleService.setTitle("laCartera | Sipariş Kayıtları")
+        this.bs.change(["Kayıtlar", "Sipariş Kayıtları"])
+
+        this.siparisListele()
+        this.siparisOzetSayilarListele()
+    }
+
+    modalAc(content, size) {
+        this.modalConfig.size = size
+        this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true })
+    }
+    
     @ViewChild('modalSiparisDetaylari') modalSiparisDetaylari: ElementRef
 
     siparisFormu = new FormGroup({
@@ -58,19 +71,6 @@ export class siparisKayitlariComponent implements OnInit {
     secilenKayit
     siparisDurumu
 
-    ngOnInit() {
-        this.titleService.setTitle("laCartera | Sipariş Kayıtları")
-        this.bs.change(["Kayıtlar", "Sipariş Kayıtları"])
-
-        this.siparisListele()
-        this.siparisOzetSayilarListele()
-    }
-
-    modalAc(content, size) {
-        this.modalConfig.size = size
-        this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true })
-    }
-    
     async siparisListele() {
         this.mainLoader = true
         this.siparisListesi = await this.islem.WebServisSorguSonucu("GET", "siparisIslemleri/siparisListesi", this.filterData)

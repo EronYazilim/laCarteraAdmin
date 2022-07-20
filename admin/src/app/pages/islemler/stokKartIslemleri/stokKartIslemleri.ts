@@ -39,6 +39,19 @@ export class stokKartIslemleriComponent implements OnInit {
 
   @ViewChild('modalStokKart') modalStokKart: ElementRef
 
+  ngOnInit() {
+    this.MAIN_URL = "https://test.eronsoftware.com:5770";
+    this.titleService.setTitle("laCartera | Stok Kart İşlemleri")
+    this.bs.change(["İşlemler", "Stok Kart İşlemleri"])
+
+    this.stokKartKayitlariListele()
+  }
+
+  modalAc(content, size) {
+    this.modalConfig.size = size
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true })
+  }
+
   modalHeader = { title: '' }
 
   stokKartFormu = new FormGroup({
@@ -77,19 +90,6 @@ export class stokKartIslemleriComponent implements OnInit {
 
   MAIN_URL
   MAIN_PORT_URL
-
-  ngOnInit() {
-    this.MAIN_URL = "https://test.eronsoftware.com:5770";
-    this.titleService.setTitle("laCartera | Stok Kart İşlemleri")
-    this.bs.change(["İşlemler", "Stok Kart İşlemleri"])
-
-    this.stokKartKayitlariListele()
-  }
-
-  modalAc(content, size) {
-    this.modalConfig.size = size
-    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true })
-  }
 
   async stokKartKayitlariListele(): Promise<void> {
     this.mainLoader = true

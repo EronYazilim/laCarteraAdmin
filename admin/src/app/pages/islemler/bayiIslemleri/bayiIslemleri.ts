@@ -28,6 +28,19 @@ export class bayiIslemleriComponent implements OnInit {
         modalConfig.size = 'sm'
     }
 
+    ngOnInit() {
+        this.titleService.setTitle("laCartera | Bayi İşlemleri")
+        this.bs.change(["İşlemler", "Bayi İşlemleri"])
+
+        this.bayiKayitlariListele()
+        this.bayiKullaniciKayitlariListele()
+    }
+
+    modalAc(content, size) {
+        this.modalConfig.size = size
+        this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true })
+    }
+
     @ViewChild('modalBayi') modalBayi: ElementRef
     @ViewChild('modalBayiKullanici') modalBayiKullanici: ElementRef
     @ViewChild('modalBayiSec') modalBayiSec: ElementRef
@@ -89,19 +102,6 @@ export class bayiIslemleriComponent implements OnInit {
     islemiKaydetBtnBayi = false
     silinenKayitBtn = [false]
     silinenKayitBtnBayi = [false]
-
-    ngOnInit() {
-        this.titleService.setTitle("laCartera | Bayi İşlemleri")
-        this.bs.change(["İşlemler", "Bayi İşlemleri"])
-
-        this.bayiKayitlariListele()
-        this.bayiKullaniciKayitlariListele()
-    }
-
-    modalAc(content, size) {
-        this.modalConfig.size = size
-        this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true })
-    }
 
     async bayiKayitlariListele(): Promise<void> {
         this.mainLoader = true

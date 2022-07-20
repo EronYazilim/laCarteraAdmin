@@ -29,6 +29,19 @@ export class satisKayitlariComponent implements OnInit {
 
     @ViewChild('modalBayi') modalBayi: ElementRef
 
+    ngOnInit() {
+        this.titleService.setTitle("laCartera | Satış Kayıtları")
+        this.bs.change(["Kayıtlar", "Satış Kayıtları"])
+
+        this.bayiKayitlariListele()
+        this.satisListele()
+    }    
+    
+    modalAc(content, size) {
+        this.modalConfig.size = size
+        this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true })
+    }
+
     modalHeader = { title: '' }
 
     filterData = {
@@ -57,26 +70,11 @@ export class satisKayitlariComponent implements OnInit {
     satisListesi
     bayiKayitlari
 
-    ngOnInit() {
-        this.titleService.setTitle("laCartera | Satış Kayıtları")
-        this.bs.change(["Kayıtlar", "Satış Kayıtları"])
-
-        this.bayiKayitlariListele()
-        this.satisListele()
-    }
-    
-    
-    modalAc(content, size) {
-        this.modalConfig.size = size
-        this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title', centered: true })
-    }
-
     async satisListele() {
         this.mainLoader = true
         this.satisListesi = await this.islem.WebServisSorguSonucu("GET", "satisIslemleri/satisListesi", this.filterData)
         if (Object.keys(this.satisListesi).length == 0) { this.satisListesi = null}
         this.mainLoader = false
-
     }
 
     async bayiKayitlariListele(): Promise<void> {
