@@ -18,7 +18,13 @@ export class webServisIslemCalistir {
 
 	WebServisSorguSonucu(METHOD, ISLEM_URL, BODY): Promise < object > {
 		return new Promise < object > (resolve => {
-			var URL = "https://test.eronsoftware.com:5770/admin/"
+
+			if (location.origin == "http://localhost:5771") {
+				var URL = "https://test.eronsoftware.com:5770/admin/";
+			} else {
+				var URL = "https://eronsoftware.com:5770/admin/"
+			}
+
 			var UTOKEN = ""
 
 			try { UTOKEN = this.store.getItem("laCartera_admin_kullanici_token") } catch (e) { UTOKEN = "" }
