@@ -32,16 +32,16 @@
                 </select>
             </div>
             <div class="col-md-3 form-group">
-                <label>Fiyat 1 (Düşük Fiyat Politikası): *</label>
-                <input type="text" class="form-control" formControlName="e_fiyat_1" title="Fiyat(1)" mask="separator.2" prefix="₺ " required>
+                <label>Fiyat 1 : *</label>
+                <input type="text" class="form-control" formControlName="e_fiyat_1" title="Fiyat(1)" mask="separator.2" prefix="€ " required>
             </div>
             <div class="col-md-3 form-group">
-                <label>Fiyat 2 (Standart Fiyat Politikası): *</label>
-                <input type="text" class="form-control" formControlName="e_fiyat_2" title="Fiyat(2)" mask="separator.2" prefix="₺ " required>
+                <label>Fiyat 2 : *</label>
+                <input type="text" class="form-control" formControlName="e_fiyat_2" title="Fiyat(2)" mask="separator.2" prefix="€ " required>
             </div>
             <div class="col-md-3 form-group">
-                <label>Fiyat 3 (Yüksek Fiyat Politikası): *</label>
-                <input type="text" class="form-control" formControlName="e_fiyat_3" title="Fiyat(3)" mask="separator.2" prefix="₺ " required>
+                <label>Fiyat 3 : *</label>
+                <input type="text" class="form-control" formControlName="e_fiyat_3" title="Fiyat(3)" mask="separator.2" prefix="€ " required>
             </div>
             <div class="col-md-3 form-group">
                 <label>Resim Uzantısı: *</label>
@@ -136,7 +136,7 @@
     <table class="table table-bordered table-hover">
         <thead>
         <tr class="alert-primary">
-            <th class="text-center w-5">Ürün ID</th>
+            <th class="text-center w-5">Ürün Resmi</th>
             <th class="text-center w-10">Cinsiyet</th>
             <th class="text-center w-5">Stok Kodu</th>
             <th class="text-center w-20">Ürün Adı</th>
@@ -151,7 +151,9 @@
         </thead>
         <tbody>
         <tr *ngFor="let stok of stokKartTanimlari">
-            <td class="text-center">{{stok.e_id}}</td>
+            <td class="text-center">
+              <img src="https://test.eronsoftware.com:5770/admin/uploads/stokKartIslemleri/{{stok.e_resim_uniq_id}}.{{stok.e_resim_dosya_uzantisi}}" width="84px" height="63px">
+            </td>
             <td class="text-center">
                 <span class="badge badge-success p-1 w-100 " style="background-color: #77B6EA;" *ngIf="stok.e_cinsiyet == 'Erkek'">Erkek</span>
                 <span class="badge badge-secondary p-1 w-100 " style="background-color: #F47C7C" *ngIf="stok.e_cinsiyet == 'Kadın'">Kadın</span>
@@ -159,9 +161,9 @@
             </td>
             <td class="text-center">{{stok.e_stok_kart_kodu}}</td>
             <td class="text-left">{{stok.e_stok_kart_adi}}</td>
-            <td class="text-right">{{stok.e_fiyat_1 | currency: ' '}} ₺</td>
-            <td class="text-right">{{stok.e_fiyat_2 | currency: ' '}} ₺</td>
-            <td class="text-right">{{stok.e_fiyat_3 | currency: ' '}} ₺</td>
+            <td class="text-right">{{stok.e_fiyat_1 | currency: ' '}} €</td>
+            <td class="text-right">{{stok.e_fiyat_2 | currency: ' '}} €</td>
+            <td class="text-right">{{stok.e_fiyat_3 | currency: ' '}} €</td>
             <td class="text-center">
                 <span class="badge badge-success p-1 w-100 " *ngIf="stok.e_durum == 'Aktif'">Aktif</span>
                 <span class="badge badge-secondary p-1 w-100 " *ngIf="stok.e_durum != 'Aktif'">Pasif</span>

@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { ReactiveFormsModule, FormsModule } from '@angular/forms'
-import { AccordionModule } from "ngx-bootstrap/accordion";
 import { PaginationModule } from "ngx-bootstrap/pagination";
 
 import { anasayfaRoutingModule } from './anasayfa-routing'
@@ -19,7 +18,6 @@ import { anasayfaComponent } from './anasayfa/anasayfa'
     NgxEchartsModule,
     NgxMaskModule.forRoot(),
     PaginationModule.forRoot(),
-    AccordionModule.forRoot()
   ],
   declarations: [
     anasayfaComponent

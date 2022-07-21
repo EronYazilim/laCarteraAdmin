@@ -95,7 +95,7 @@
       </div>
       <div class="form-group col-md-2">
         <label>&nbsp;</label>
-        <button class="btn btn-dark btn-block" (click)="satisListele()"><i class="fas fa-sync mr-2"></i> Filtrele</button>
+        <button class="btn btn-dark btn-block"><i class="fas fa-sync mr-2"></i> Filtrele</button>
       </div>
     </form>
   </div>
@@ -128,11 +128,19 @@
           <tbody>
             <tr *ngFor="let satis of satisListesi">
               <td class="text-center">{{satis.e_bayi_kodu}}</td>
-                <td class="text-center">{{satis.e_tarih | date: 'dd.MM.yyyy - HH:mm'}}</td>
-                <td class="text-left">{{satis.e_bayi_adi}}</td>
-                <td class="text-left">{{satis.e_satisi_acan_kullanici_adi}}</td>
-                <td class="text-center">{{satis.e_odeme_tipi}}</td>
-                <td class="text-right">{{satis.e_sepet_toplami | currency : ' '}} ₺</td>
+              <td class="text-center">{{satis.e_tarih | date: 'dd.MM.yyyy - HH:mm'}}</td>
+              <td class="text-left">{{satis.e_bayi_adi}}</td>
+              <td class="text-left">{{satis.e_satisi_acan_kullanici_adi}}</td>
+              <td class="text-center">{{satis.e_odeme_tipi}}</td>
+              <td class="text-right">{{satis.e_sepet_toplami | currency : ' '}} €</td>
+            </tr>
+            <tr class="alert-primary">
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td class="text-right">SATIŞ TOPLAMI : {{satisListesi[0].SATIS_TOPLAMI | currency : ' '}} €</td>
             </tr>
           </tbody>
         </table>
