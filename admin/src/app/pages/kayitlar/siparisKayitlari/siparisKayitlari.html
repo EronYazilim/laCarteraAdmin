@@ -58,28 +58,28 @@
 
 <div class="row m-1" *ngIf="siparisOzetSayilar">
   <div class="col-3" (click)="filtreliListele('İşlem Bekliyor')">
-    <div class="shadow-warning m-1">
+    <div class="card m-1" [class]="{'shadow-warning': filterData.e_durum == 'İşlem Bekliyor'}">
       <div class="card-body" style="text-align: center;">
         <strong>İşlem Bekleyen : {{siparisOzetSayilar[0].ISLEM_BEKLIYOR}}</strong>
       </div>
     </div>
   </div>
-  <div class="col-3">
-    <div class="shadow-info m-1" (click)="filtreliListele('İşleme Alındı')">
+  <div class="col-3" (click)="filtreliListele('İşleme Alındı')">
+    <div class="card m-1" [class]="{'shadow-info': filterData.e_durum == 'İşleme Alındı'}">
       <div class="card-body" style="text-align: center;">
         <strong>İşleme Alınan : {{siparisOzetSayilar[0].ISLEME_ALINDI}}</strong>
       </div>
     </div>
   </div>
   <div class="col-3" (click)="filtreliListele('Gönderildi')">
-    <div class="shadow-success m-1">
+    <div class="card m-1" [class]="{'shadow-success': filterData.e_durum == 'Gönderildi'}">
       <div class="card-body" style="text-align: center;">
         <strong>Gönderilen : {{siparisOzetSayilar[0].GONDERILDI}}</strong>
       </div>
     </div>
   </div>
   <div class="col-3" (click)="filtreliListele('')">
-    <div class="shadow-primary m-1">
+    <div class="card m-1" [class]="{'shadow-primary': filterData.e_durum == ''}">
       <div class="card-body" style="text-align: center;">
         <strong>Tümü : {{siparisOzetSayilar[0].TUMU}}</strong>
       </div>
@@ -90,9 +90,21 @@
 <div class="card shadow-dark mt-2 mb-3">
   <div class="card-body">
     <form class="row m-0" (submit)="siparisListele()">
-      <div class="form-group col-md-10">
+      <div class="form-group col-md-4">
         <label>Arama:</label>
         <input type="text" class="form-control" [(ngModel)]="filterData.ARAMA" [ngModelOptions]="{standalone: true}">
+      </div>
+      <div class="form-group col-md-2">
+        <label>Tarih Başlangıç</label>
+        <input type="date" class="form-control" [(ngModel)]="filterData.e_tarih_baslangic" [ngModelOptions]="{standalone: true}">
+      </div>
+      <div class="form-group col-md-2">
+        <label>Tarih Bitiş</label>
+        <input type="date" class="form-control" [(ngModel)]="filterData.e_tarih_bitis" [ngModelOptions]="{standalone: true}">
+      </div>
+      <div class="form-group col-md-2">
+        <label>Sipariş ID:</label>
+        <input type="text" class="form-control" [(ngModel)]="filterData.ESKI_ID" [ngModelOptions]="{standalone: true}">
       </div>
       <div class="form-group col-md-2">
         <label>&nbsp;</label>
@@ -121,9 +133,10 @@
               <th class="text-center w-10">Tarih</th>
               <th class="text-center w-5">Bayi Kodu</th>
               <th class="text-center w-15">Bayi Adı</th>
+              <th class="text-center w-10">Sipariş No</th>
               <th class="text-center w-15">Siparişi Açan</th>
-              <th class="text-center w-20">Ürün Kalem Adedi</th>
-              <th class="text-center w-15">Miktar</th>
+              <th class="text-center w-10">Ürün Kalem Adedi</th>
+              <th class="text-center w-10">Miktar</th>
               <th class="text-center w-20">Durum</th>
             </tr>
           </thead>
@@ -132,6 +145,7 @@
                 <td class="text-center">{{siparis.e_tarih | date: 'dd.MM.yyyy - HH:mm'}}</td>
                 <td class="text-left">{{siparis.e_bayi_kodu}}</td>
                 <td class="text-left">{{siparis.e_bayi_adi}}</td>
+                <td class="text-left">{{siparis.e_id}}</td>
                 <td class="text-left">{{siparis.e_siparisi_acan_kullanici_adi}}</td>
                 <td class="text-center">{{siparis.e_farkli_kalem_sayisi}} adet</td>
                 <td class="text-center">{{siparis.e_toplam_miktar}} adet</td>

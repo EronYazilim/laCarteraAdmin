@@ -1,3 +1,4 @@
+import { formatDate } from "@angular/common";
 import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import { Title } from "@angular/platform-browser";
@@ -34,6 +35,8 @@ export class siparisKayitlariComponent implements OnInit {
 
         this.siparisListele()
         this.siparisOzetSayilarListele()
+        console.log(this.filterData.e_tarih_baslangic)
+        console.log(this.filterData.e_tarih_bitis)
     }
 
     modalAc(content, size) {
@@ -53,11 +56,13 @@ export class siparisKayitlariComponent implements OnInit {
     modalHeader = { title: '' }
 
     filterData = {
-        ARAMA   : '',
-        SS      : 1,
-        KS      : 15,
-        e_durum : 'İşlem Bekliyor',
-        ESKI_ID : ''
+        ARAMA               : '',
+        SS                  : 1,
+        KS                  : 15,
+        e_durum             : 'İşlem Bekliyor',
+        e_tarih_baslangic   : formatDate(new Date().setMonth(new Date().getMonth()), "dd-MM-yyyy", "en"),
+        e_tarih_bitis       : formatDate(new Date().setMonth(new Date().getMonth() + 1), "dd-MM-yyyy", "en"),
+        ESKI_ID             : ''
     }
 
     requestData
@@ -66,6 +71,7 @@ export class siparisKayitlariComponent implements OnInit {
     ozetLoader = false
     islemiKaydetBtn
 
+    SECILI
     siparisListesi
     siparisOzetSayilar
     secilenKayit
