@@ -13,7 +13,7 @@ import Swal from 'sweetalert2/dist/sweetalert2'
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import * as XLSX from 'xlsx';
-
+import { isDevMode } from '@angular/core';
 
 @Component({
     selector: 'app-stokKartIslemleri',
@@ -40,7 +40,13 @@ export class stokKartIslemleriComponent implements OnInit {
   @ViewChild('modalStokKart') modalStokKart: ElementRef
 
   ngOnInit() {
-    this.MAIN_URL = "https://test.eronsoftware.com:5770";
+
+    if (isDevMode() == true){
+      this.MAIN_URL = "https://test.eronsoftware.com:5770/";
+    } else {
+      this.MAIN_URL = "https://eronsoftware.com:5770";
+    }
+    
     this.titleService.setTitle("laCartera | Stok Kart İşlemleri")
     this.bs.change(["İşlemler", "Stok Kart İşlemleri"])
 
