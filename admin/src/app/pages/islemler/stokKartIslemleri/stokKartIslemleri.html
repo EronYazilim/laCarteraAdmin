@@ -152,7 +152,7 @@
         <tbody>
         <tr *ngFor="let stok of stokKartTanimlari">
             <td class="text-center">
-              <img src="https://test.eronsoftware.com:5770/admin/uploads/stokKartIslemleri/{{stok.e_resim_uniq_id}}.{{stok.e_resim_dosya_uzantisi}}" width="84px" height="63px">
+              <img src="{{MAIN_URL}}/admin/uploads/stokKartIslemleri/{{stok.e_resim_uniq_id}}.{{stok.e_resim_dosya_uzantisi}}" width="84px" height="63px">
             </td>
             <td class="text-center">
                 <span class="badge badge-success p-1 w-100 " style="background-color: #77B6EA;" *ngIf="stok.e_cinsiyet == 'Erkek'">Erkek</span>

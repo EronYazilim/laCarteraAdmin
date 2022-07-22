@@ -42,7 +42,7 @@ export class stokKartIslemleriComponent implements OnInit {
   ngOnInit() {
 
     if (isDevMode() == true){
-      this.MAIN_URL = "https://test.eronsoftware.com:5770/";
+      this.MAIN_URL = "https://test.eronsoftware.com:5770";
     } else {
       this.MAIN_URL = "https://eronsoftware.com:5770";
     }
