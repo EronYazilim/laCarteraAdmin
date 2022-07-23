@@ -31,22 +31,22 @@
                     <option value="Pasif">Pasif</option>
                 </select>
             </div>
-            <div class="col-md-3 form-group">
+            <div class="col-md-4 form-group">
                 <label>Fiyat 1 : *</label>
                 <input type="text" class="form-control" formControlName="e_fiyat_1" title="Fiyat(1)" mask="separator.2" prefix="€ " required>
             </div>
-            <div class="col-md-3 form-group">
+            <div class="col-md-4 form-group">
                 <label>Fiyat 2 : *</label>
                 <input type="text" class="form-control" formControlName="e_fiyat_2" title="Fiyat(2)" mask="separator.2" prefix="€ " required>
             </div>
-            <div class="col-md-3 form-group">
+            <div class="col-md-4 form-group">
                 <label>Fiyat 3 : *</label>
                 <input type="text" class="form-control" formControlName="e_fiyat_3" title="Fiyat(3)" mask="separator.2" prefix="€ " required>
             </div>
-            <div class="col-md-3 form-group">
+            <!-- <div class="col-md-3 form-group">
                 <label>Resim Uzantısı: *</label>
                 <input type="text" class="form-control" formControlName="e_resim_dosya_uzantisi" title="Resim Uzantısı" readonly required>
-            </div>
+            </div> -->
             <div class="col-md-12 form-group">
                 <label>Açıklama: *</label>
                 <ckeditor [editor]="Editor" [config]="editor_config" formControlName="e_stok_kart_aciklamasi" (ready)="editorReady($event)" ></ckeditor>

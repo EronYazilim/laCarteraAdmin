@@ -142,7 +142,9 @@ export class bayiIslemleriComponent implements OnInit {
             e_bayi_id : secilenBayi.e_id,
             e_bayi_adi : secilenBayi.e_bayi_adi
         })
+        this.modalHeader.title = this.secilenBayi.e_bayi_adi + ' Bayisi Kullanıcıları Tablosu'
         this.modalAc(this.modalBayiKullaniciTablo, 'xl')
+        console.log(this.secilenBayi.e_bayi_adi)
     }
 
     bayiKullanicisiEkleButton() {
@@ -155,7 +157,7 @@ export class bayiIslemleriComponent implements OnInit {
             e_sifre     : '',
             e_durum     : '',
         })
-        this.modalHeader.title = 'Yeni Bayi Kullanıcısı Ekleme Formu'
+        this.modalHeader.title = this.secilenBayi.e_bayi_adi + " Bayisi Kullanıcı Ekleme Formu"
         this.modalAc(this.modalBayiKullanici, 'md')
     }
 
@@ -188,7 +190,7 @@ export class bayiIslemleriComponent implements OnInit {
             e_durum     : secilenKullanici.e_durum,
             ESKI_ID     : secilenKullanici.e_id,
         })
-        this.modalHeader.title = 'Bayi Kullanıcısı Düzenleme Formu'
+        this.modalHeader.title = this.secilenBayi.e_bayi_adi + ' Bayisi Kullanıcı Düzenleme Formu'
         this.modalAc(this.modalBayiKullanici, 'md')
     }
 
